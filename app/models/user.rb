@@ -24,23 +24,16 @@ class User < ApplicationRecord
   end
 
   #フォロー時の処理
-  def follow(user_id)
-    relationships.create(followed_id: user_id)
+  def follow(user)
+    relationships.create(followed_id: user.id)
   end
 
-  #フォロー外すときの処理
-  def unfollow(user_id)
-    relationships.find_by(followed_id: user_id).destroy
+  def unfollow(user)
+    relationships.find_by(followed_id: user.id).destroy
   end
 
-  def current_user?(user)
-    user == current_user
-  end
-  #フォローしているかの判定
   def following?(user)
     followings.include?(user)
   end
-
-
-
 end
+
